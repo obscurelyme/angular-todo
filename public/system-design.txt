@@ -1,0 +1,87 @@
+Data Model
+---
+
+PostgresDB, can use Serverless AuroraDB for cost savings, OR
+provisioned AuroraDB for more stable uptime either way leveraing serverless aurora will give
+us scalability out of the box that should accomplish what we need.
+
+Bugs
+ - id: PK
+ - title
+ - description
+ - status
+ - severity
+ - reporter: FK -> Users
+
+Users
+ - id: PK
+ - name
+ - role
+ - team: FK -> Teams
+
+Teams
+ - id: PK
+ - name
+
+
+API
+---
+
+NodeJS will be deployed using ECS, for better reproduceability.
+
+/bugs?severity={:severity}&status={:status}&reporter={:reporter}&search={:search}
+  - GET
+    - {
+        {
+          id: int,
+          title: string,
+          desc: string,
+          status: string,
+          severity: string,
+          reporter {
+            id: int,
+            name: string,
+            team {
+              id: int,
+              name: string
+            }
+          }
+        }[],
+        next?: int,
+        prev?: int
+      }
+  - POST
+/bugs/{:id}
+  - PUT
+  - DELETE
+/updates
+  - wss connection that frontend will use, messages can be pushed here when CRUD http happens.
+
+
+Frontend
+---
+
+Deployed to S3 and served with Cloudfront for caching
+
+Using Angular
+
+Components
+- List component
+  - lists out all of the bugs, paginated.
+- Short-form Bug component
+  - title
+  - reporter
+  - severity
+  - status
+- Long-form bug component
+  - title
+  - reporter
+  - severity
+  - status
+  - description
+  - team
+  - user can make edits to the bug here, and even delete
+- Create button
+  - opens a model similar to Long-form bug component, user fills it in
+    and clicks "submit".
+- Angular Web Socket connection to NodeJS backend to track real-time updates

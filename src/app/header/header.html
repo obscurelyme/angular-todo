@@ -1,14 +1,18 @@
-<header>
+<header class="py-3">
   <div class="container">
-    <div class="row navigation">
-      <h2>TODO</h2>
-      <nav>
-        <ul class="navigation-list">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Login</a></li>
-        </ul>
-      </nav>
+    <div class="row">
+      <div class="col-sm-3">
+        <h2>{{ title() }}</h2>
+      </div>
+      <div class="col-sm-9">
+        <nav>
+          <ul class="d-flex navigation-list justify-content-end">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </header>

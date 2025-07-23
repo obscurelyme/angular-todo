@@ -1,0 +1,10 @@
+<div
+  tabindex="0"
+  class="avatar"
+  (click)="handleClick()"
+  (keydown)="handleKeyDown($event)"
+  role="button"
+>
+  <img [src]="image()" [alt]="imageAltText()" />
+  <span>{{ name() }}</span>
+</div>

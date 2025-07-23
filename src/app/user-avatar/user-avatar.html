@@ -1,4 +1,11 @@
-<button class="avatar" (click)="handleClick()">
-  <img [src]="image()" [alt]="imageAltText()" />
-  <span>{{ name() }}</span>
-</button>
+@if (clickable()) {
+  <button class="avatar" (click)="handleClick()">
+    <img [src]="image()" [alt]="imageAltText()" />
+    <span>{{ name() }}</span>
+  </button>
+} @else {
+  <div class="avatar">
+    <img [src]="image()" [alt]="imageAltText()" />
+    <span>{{ name() }}</span>
+  </div>
+}

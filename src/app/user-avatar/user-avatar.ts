@@ -1,4 +1,5 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import type { User } from '../users';
 
 @Component({
   selector: 'user-avatar',
@@ -7,13 +8,22 @@ import { Component, computed, input } from '@angular/core';
   styleUrl: './user-avatar.scss',
 })
 export class UserAvatar {
-  image = input('');
-  name = input('');
+  image = input.required<string>();
+  name = input.required<string>();
+  userId = input.required<string>();
+  fullWidth = input(false);
+  clickable = input(true);
+
+  onUserSelected = output<User>();
 
   imageAltText = computed(() => `${this.name()}'s thumbnail avatar`);
 
   public handleClick() {
-    console.log('do this');
+    this.onUserSelected.emit({
+      id: this.userId(),
+      name: this.name(),
+      image: this.image(),
+    });
   }
 
   // NOTE: need to handle keydown and ensure that it's not a repeat key

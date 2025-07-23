@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
 
+const TITLE = '// TODO';
+
 @Component({
   selector: 'app-header',
   imports: [],
@@ -7,5 +9,5 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header.scss',
 })
 export class Header {
-  title = signal('// TODO');
+  readonly title = signal(TITLE);
 }

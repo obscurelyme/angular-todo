@@ -7,12 +7,29 @@
         <ul class="list-group">
           @for (user of users(); track user.id) {
             <li class="list-group-item">
-              <user-avatar [image]="user.image" [name]="user.name" />
+              <user-avatar
+                [userId]="user.id"
+                [image]="user.image"
+                [name]="user.name"
+                [fullWidth]="true"
+                (onUserSelected)="handleUserSelect($event)"
+              />
             </li>
           }
         </ul>
       </div>
-      <div class="col-sm-8"></div>
+      <div class="col-sm-8">
+        @let user = selectedUser();
+        @if (user) {
+          <h3>{{ user.name }}'s Tasks</h3>
+        } @else {
+          <p>Select a user to view their tasks.</p>
+        }
+        <hr />
+        @if (user) {
+          <user-tasks [userId]="user.id" />
+        }
+      </div>
     </div>
   </div>
 </main>

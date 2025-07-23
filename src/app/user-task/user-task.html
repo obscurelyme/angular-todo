@@ -1,10 +1,24 @@
-<div>
-  <div class="d-flex w-100 justify-content-between">
-    <h4>{{ task().title }}</h4>
-    <small>Created: {{ task().createdAt | date: "mediumDate" }}</small>
+<div class="task">
+  <div class="d-flex w-100 justify-content-between align-items-center">
+    <h4 class="m-0">{{ task().title }}</h4>
+    <div class="d-flex flex-column">
+      <button type="button" class="btn btn-warning">Edit</button>
+    </div>
   </div>
-  <div>
-    <p>{{ task().description }}</p>
+  <hr />
+  <p>{{ task().description }}</p>
+  <div class="d-flex align-items-center justify-content-between">
     <task-status [status]="task().status" />
+    <div>
+      <small class="me-3"
+        >Created: {{ task().createdAt | date: "mediumDate" }}</small
+      >
+      <small class="me-3"
+        >Updated: {{ task().updatedAt | date: "mediumDate" }}</small
+      >
+      @if (task().completedAt) {
+        <small>Completed: {{ task().completedAt | date: "mediumDate" }}</small>
+      }
+    </div>
   </div>
 </div>

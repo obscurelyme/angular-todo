@@ -4,15 +4,13 @@
       <avatar [image]="user().image" [name]="user().name" />
       <h3 class="m-3">{{ title() }}</h3>
     </div>
-    <button type="button" class="btn btn-primary" (click)="addTask()">
-      Add Task
-    </button>
+    <task-modal [user]="user()" />
   </div>
 
   <hr />
-  @if (tasks().length > 0) {
+  @if (tasks.length > 0) {
     <ul class="list-group task-list">
-      @for (task of tasks(); track task.id) {
+      @for (task of tasks; track task.id) {
         <li class="list-group-item task-list-item">
           <user-task [task]="task" />
         </li>

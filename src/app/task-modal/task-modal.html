@@ -1,0 +1,63 @@
+@if (isEditingTask()) {
+  <button type="button" class="btn btn-warning" (click)="openModal()">
+    Edit Task
+  </button>
+} @else {
+  <button type="button" class="btn btn-primary" (click)="openModal()">
+    Add Task
+  </button>
+}
+
+<dialog #dialog>
+  <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+    <div class="mb-3">
+      <label for="taskTitle">Title:</label>
+      <input
+        id="taskTitle"
+        [formControlName]="'title'"
+        class="form-control"
+        type="text"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="taskDescription">Description:</label>
+      <textarea
+        id="taskDescription"
+        [formControlName]="'description'"
+        class="form-control"
+        type="text"
+        label="description"
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="taskPriority" class="me-3">Priority:</label>
+      <select id="taskPriority" [formControlName]="'priority'">
+        @for (priorityOption of priorityOptions; track priorityOption.id) {
+          <option [value]="priorityOption.id">
+            {{ priorityOption.label }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="taskStatus" class="me-3">Status:</label>
+      <select id="taskStatus" [formControlName]="'status'">
+        @for (statusOption of statusOptions; track statusOption.id) {
+          <option [value]="statusOption.id">
+            {{ statusOption.label }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <button type="submit" class="me-1 btn btn-primary">Submit</button>
+      <button type="button" (click)="cancelForm()" class="btn btn-secondary">
+        Cancel
+      </button>
+    </div>
+  </form>
+</dialog>
